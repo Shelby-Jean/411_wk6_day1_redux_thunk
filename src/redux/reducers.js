@@ -17,7 +17,7 @@ const cars = (state = [], action) => {
 
 const makes = (state = [], action) => {
     switch(action.type) {
-        case 'FETCH_MAKE':
+        case 'FETCH_MAKES':
             return action.value
         default:
             return state
