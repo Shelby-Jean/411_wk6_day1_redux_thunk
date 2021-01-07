@@ -23,8 +23,15 @@ export const fetchMakes = () => {
                 const action = {
                     type: 'FETCH_MAKES',
                     value: response.Results
-                };
+                }
                 dispatch(action)
-            });
-    };
-};
+            })
+    }
+}
+
+export const deleteMake = (index) => {
+    return {
+        type: 'DELETE_MAKE',
+        value: index
+    }
+}

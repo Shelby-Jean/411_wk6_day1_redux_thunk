@@ -5,19 +5,23 @@ import { MoreVert } from '@material-ui/icons';
 const Import = (props) => {
     const [anchorEl, setAnchorEl] = React.useState(null);
 
-    const handleClick = (event) => {
-      setAnchorEl(event.currentTarget);
+    let currentIndex;
+
+    const handleClick = (event, index) => {
+        currentIndex = index;
+        setAnchorEl(event.currentTarget);
     };
   
     const handleClose = () => {
-      setAnchorEl(null);
+        props.deleteMake(currentIndex);
+        setAnchorEl(null);
     };
 
     return (
         <div>
-        <Button variant="contained" color="primary" onClick={props.fetchMakes}>Import</Button>
-        <h2>COUNT</h2>
-        <Container>
+        <Container maxWidth="md" className="import-container">
+            <Button variant="contained" color="primary" onClick={props.fetchMakes}>Import</Button>
+            <h2>COUNT: {props.makes.length}</h2>
             <Table>
                 <TableHead>
                     <TableRow>
@@ -27,12 +31,12 @@ const Import = (props) => {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {props.makes.map(make => (
+                    {props.makes.map((make, index) => (
                         <TableRow key={make.MakeId}>
                             <TableCell>{make.MakeId}</TableCell>
                             <TableCell>{make.MakeName}</TableCell>
                             <TableCell>
-                                <MoreVert aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick} />
+                                <MoreVert aria-controls="simple-menu" aria-haspopup="true" onClick={(event) => handleClick(event, index)} />
                             </TableCell>
                         </TableRow>
                     ))}
